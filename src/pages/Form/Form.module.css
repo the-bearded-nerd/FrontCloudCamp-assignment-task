@@ -1,0 +1,70 @@
+.form {
+  max-width: 900px;
+  margin: 0 auto;
+  padding-top: 62px;
+  padding-bottom: 80px;
+  background: #ffffff;
+  border-radius: 24px;
+}
+
+.form-container {
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.form-buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 64px;
+}
+
+.step-container {
+  margin-top: 66px;
+  position: relative;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  row-gap: 8px;
+  flex-grow: 1;
+}
+
+.field-container {
+  max-width: 300px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 24px;
+}
+
+.field-container-wide {
+  max-width: 334px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 24px;
+}
+
+.tip {
+  visibility: visible;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+  color: rgba(0, 0, 0, 0.48);
+}
+
+.tip-hidden {
+  visibility: hidden;
+  height: 16px;
+}
+
+.advantage {
+  display: flex;
+  column-gap: 16px;
+}
+
+.textarea-counter {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}

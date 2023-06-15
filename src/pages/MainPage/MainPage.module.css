@@ -1,0 +1,42 @@
+.mainpage {
+  max-width: 900px;
+  margin: 0 auto;
+  padding-top: 62px;
+  padding-bottom: 80px;
+  background: #ffffff;
+  border-radius: 24px;
+}
+
+.mainpage-container {
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  row-gap: 8px;
+}
+.field-container {
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 24px;
+}
+.field-tip {
+  font-size: 12px;
+  line-height: 16px;
+  color: rgba(0, 0, 0, 0.48);
+}
+
+.field-tip__hidden {
+  visibility: hidden;
+  height: 16px;
+}
+
+.mainpage-buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 48px;
+}

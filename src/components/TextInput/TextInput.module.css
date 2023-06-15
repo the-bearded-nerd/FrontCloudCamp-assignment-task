@@ -1,0 +1,20 @@
+.field {
+  display: flex;
+  flex-direction: column;
+  row-gap: 8px;
+  flex-grow: 1;
+}
+.field-tip {
+  font-size: 12px;
+  line-height: 16px;
+  color: rgba(0, 0, 0, 0.48);
+}
+
+.field-tip__hidden {
+  visibility: hidden;
+  height: 16px;
+}
+
+.field-input::placeholder {
+  color: rgba(0, 0, 0, 0.48);
+}
