@@ -68,6 +68,7 @@ export const Step1 = () => {
       <div className={cls["field"]}>
         <label>Sex</label>
         <Select
+          id="field-sex"
           options={sexOptions}
           selected={sexOptions.find((item) => item.value === sexValue) || null}
           onChange={(option) => {

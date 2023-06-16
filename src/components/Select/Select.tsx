@@ -9,6 +9,7 @@ type Option = {
   value: string;
 };
 type OptionProps = {
+  parentId?: string;
   option: Option;
   onClick: (value: Option["value"]) => void;
 };
@@ -16,6 +17,7 @@ const OptionEl = (props: OptionProps) => {
   const {
     option: { value, title },
     onClick,
+    parentId,
   } = props;
   const optionRef = useRef<HTMLLIElement>(null);
 
@@ -43,10 +45,10 @@ const OptionEl = (props: OptionProps) => {
   return (
     <li
       className={Styles.option}
+      id={parentId ? `${parentId}-option-${value}` : undefined}
       value={value}
       onClick={handleClick(value)}
       tabIndex={0}
-      data-testid={`select-option-${value}`}
       ref={optionRef}
     >
       {title}
@@ -59,6 +61,7 @@ type SelectProps = {
   options: Option[];
   placeholder?: string;
   status?: "default" | "invalid";
+  id?: string;
   onChange?: (selected: Option["value"]) => void;
   onClose?: () => void;
 };
@@ -71,6 +74,7 @@ const Select = (props: SelectProps) => {
     selected,
     onChange,
     onClose,
+    id,
   } = props;
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const rootRef = useRef<HTMLDivElement>(null);
@@ -121,7 +125,7 @@ const Select = (props: SelectProps) => {
       className={Styles.selectWrapper}
       ref={rootRef}
       data-is-active={isOpen}
-      data-testid="selectWrapper"
+      id={id}
     >
       <div className={Styles.arrow} onClick={handlePlaceHolderClick}>
         <ArrowDown />
@@ -138,10 +142,11 @@ const Select = (props: SelectProps) => {
         {selected?.title || placeholder}
       </div>
       {isOpen && (
-        <ul className={Styles.select} data-testid="selectDropdown">
+        <ul className={Styles.select}>
           {options.map((option) => (
             <OptionEl
               key={option.value}
+              parentId={id}
               option={option}
               onClick={handleOptionClick}
             />
