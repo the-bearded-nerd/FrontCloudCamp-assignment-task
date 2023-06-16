@@ -1,8 +1,9 @@
 import { useForm } from "react-hook-form";
 import InputMask from "react-input-mask";
+import { useNavigate } from "react-router-dom";
 
 import { Button, ThemeButton } from "../../components/Button/Button";
-import { useNavigate } from "react-router-dom";
+import { UserData } from "../../components/PersonalData/PersonalData";
 
 import cls from "./MainPage.module.css";
 
@@ -31,7 +32,7 @@ export const MainPage = () => {
   return (
     <div className={cls["mainpage"]}>
       <div className={cls["mainpage-container"]}>
-        <h1>Main Page</h1>
+        <UserData />
         <form className={cls["field-container"]}>
           <div className={cls["field"]}>
             <label htmlFor="field-phone">Номер телефона</label>

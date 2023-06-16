@@ -1,6 +1,5 @@
 .selectWrapper {
   position: relative;
-  border-radius: 4px;
 }
 
 .arrow {
@@ -18,13 +17,12 @@
   padding: 12px;
   cursor: pointer;
   border: 1px;
+  border-radius: 4px;
   font-size: 14px;
   line-height: 20px;
   color: rgba(0, 0, 0, 0.48);
   background: rgb(255, 255, 255);
-  box-sizing: border-box;
   width: 100%;
-  border-radius: 2px;
 }
 
 .placeholder[data-status="default"] {
