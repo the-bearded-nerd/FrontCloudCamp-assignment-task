@@ -16,8 +16,6 @@ export const Step3 = () => {
     setCharCount(e.target.value.replaceAll(" ", "").length);
   };
 
-  console.log(errors);
-
   return (
     <div className={cls["field"]}>
       <label htmlFor="field-about">About</label>

@@ -1,7 +1,9 @@
+import { useState } from "react";
 import { useMultispetForm } from "../../useMultistepForm";
 import { useForm, SubmitHandler, FormProvider } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
+import Modal from "../../components/Modal/Modal";
 import { ThemeButton, Button } from "../../components/Button/Button";
 import { Stepper } from "../../components/Stepper/Stepper";
 import { Step1 } from "./Step1/Step1";
@@ -35,6 +37,17 @@ export type Inputs = {
 };
 
 export const Form = () => {
+  const [isModalActive, setModalActive] = useState(false);
+  const [modalContent, setModalContent] = useState("");
+
+  const openModal = () => {
+    setModalActive(true);
+  };
+
+  const closeModal = () => {
+    setModalActive(false);
+  };
+
   const navigate = useNavigate();
   const methods = useForm<Inputs>({
     defaultValues: {
@@ -43,6 +56,8 @@ export const Form = () => {
         { description: "" },
         { description: "" },
       ],
+      checkbox: [],
+      radio: NaN,
     },
   });
   const { handleSubmit } = methods;
@@ -57,10 +72,30 @@ export const Form = () => {
     steps,
   } = useMultispetForm([<Step1 />, <Step2 />, <Step3 />]);
 
-  const onSubmitHandler: SubmitHandler<Inputs> = (data) => {
-    console.log(data);
-    if (isLastStep) alert("приехали");
-    else next();
+  const onSubmitHandler: SubmitHandler<Inputs> = async (data) => {
+    if (isLastStep) {
+      const dataToSend = {
+        ...data,
+        advantages: data.advantages.map((adv) => Object.values(adv)[0]),
+        radio: data.radio ? Number(data.radio) : NaN,
+        checkbox: data.checkbox ? data.checkbox.map(Number) : [],
+      };
+      console.log(dataToSend);
+      console.log(JSON.stringify(dataToSend));
+      const response = await fetch(
+        "https://api.sbercloud.ru/content/v1/bootcamp/frontend",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(dataToSend),
+        }
+      );
+      if (response.ok) setModalContent("отлично");
+      else setModalContent("все плохо");
+      openModal();
+    } else next();
   };
 
   const onBackButtonClickHandler = (e: React.MouseEvent) => {
@@ -92,6 +127,9 @@ export const Form = () => {
           </form>
         </FormProvider>
       </div>
+      <Modal isActive={isModalActive} onClose={closeModal}>
+        <p>{modalContent}</p>
+      </Modal>
     </div>
   );
 };
