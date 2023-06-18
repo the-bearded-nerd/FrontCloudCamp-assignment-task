@@ -41,7 +41,7 @@ export const MainPage = () => {
               mask={"+7 (999) 999 9999"}
               alwaysShowMask={false}
               type="text"
-              placeholder="phone"
+              placeholder="+7 (910) 456 5763"
               {...register("phone", {
                 required: true,
                 pattern: {
