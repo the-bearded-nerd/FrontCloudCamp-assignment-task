@@ -1,14 +1,18 @@
 import { useState } from "react";
-import { useMultispetForm } from "../../useMultistepForm";
 import { useForm, SubmitHandler, FormProvider } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
+import { useMultispetForm } from "../../useMultistepForm";
 import Modal from "../../components/Modal/Modal";
 import { ThemeButton, Button } from "../../components/Button/Button";
 import { Stepper } from "../../components/Stepper/Stepper";
 import { Step1 } from "./Step1/Step1";
 import { Step2 } from "./Step2/Step2";
 import { Step3 } from "./Step3/Step3";
+import {
+  ResponseModalContent,
+  ResponseModalContentProps,
+} from "../../components/ResponseModalContent/ResponseModalContent";
 
 import cls from "./Form.module.css";
 
@@ -38,7 +42,9 @@ export type Inputs = {
 
 export const Form = () => {
   const [isModalActive, setModalActive] = useState(false);
-  const [modalContent, setModalContent] = useState("");
+  const [modalContent, setModalContent] = useState(
+    {} as ResponseModalContentProps
+  );
 
   const openModal = () => {
     setModalActive(true);
@@ -80,10 +86,8 @@ export const Form = () => {
         radio: data.radio ? Number(data.radio) : NaN,
         checkbox: data.checkbox ? data.checkbox.map(Number) : [],
       };
-      console.log(dataToSend);
-      console.log(JSON.stringify(dataToSend));
       const response = await fetch(
-        "https://api.sbercloud.ru/content/v1/bootcamp/frontend",
+        "https://api.sbercloud.ru/content/v1/bootcamp/fronten",
         {
           method: "POST",
           headers: {
@@ -92,8 +96,12 @@ export const Form = () => {
           body: JSON.stringify(dataToSend),
         }
       );
-      if (response.ok) setModalContent("отлично");
-      else setModalContent("все плохо");
+      setModalContent({
+        ok: response.ok,
+        status: response.status,
+        statusText: response.statusText,
+      });
+      console.log(response);
       openModal();
     } else next();
   };
@@ -114,13 +122,18 @@ export const Form = () => {
 
             <div className={cls["form-buttons"]}>
               <Button
+                id={"button-back"}
                 type="button"
                 theme={ThemeButton.SECONADARY}
                 onClick={onBackButtonClickHandler}
               >
                 Назад
               </Button>
-              <Button type="submit" theme={ThemeButton.PRIMARY}>
+              <Button
+                id={isLastStep ? "button-send" : "button-next"}
+                type="submit"
+                theme={ThemeButton.PRIMARY}
+              >
                 {isLastStep ? "Отправить" : "Далее"}
               </Button>
             </div>
@@ -128,7 +141,7 @@ export const Form = () => {
         </FormProvider>
       </div>
       <Modal isActive={isModalActive} onClose={closeModal}>
-        <p>{modalContent}</p>
+        <ResponseModalContent {...modalContent} handleClose={closeModal} />
       </Modal>
     </div>
   );
