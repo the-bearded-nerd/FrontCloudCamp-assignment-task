@@ -6,12 +6,13 @@ import {
 
 import { TextInput } from "../../../components/TextInput/TextInput";
 import Select from "../../../components/Select/Select";
+import { USER_SEX } from "../types";
 
 import cls from "../Form.module.css";
 
 const sexOptions = [
-  { title: "man", value: "man" },
-  { title: "woman", value: "woman" },
+  { title: USER_SEX.man, value: USER_SEX.man },
+  { title: USER_SEX.woman, value: USER_SEX.woman },
 ];
 
 const NicknameRegisterOptions: RegisterOptions = {

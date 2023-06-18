@@ -49,6 +49,7 @@ export const MainPage = () => {
                   message: "Incorrect phone number",
                 },
               })}
+              disabled
             />
             <p className={cls[`field-tip${errors.phone ? "" : "__hidden"}`]}>
               {errors.phone?.message}

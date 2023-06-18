@@ -28,7 +28,7 @@ export const Step3 = () => {
           onChange: onChangeHandler,
         })}
       ></textarea>
-      <div className={cls["textarea-counter"]}>{charCount}</div>
+      <div className={cls["textarea-counter"]}>{`${charCount}/200`}</div>
       <p className={cls[`tip${errors.about ? "" : "-hidden"}`]}>
         Too long text
       </p>

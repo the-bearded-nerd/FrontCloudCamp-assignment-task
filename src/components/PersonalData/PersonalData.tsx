@@ -12,6 +12,10 @@ export const UserData = () => {
         <div className={cls["user-social"]}>
           <SocialLink name="Telegram" url="https://t.me/DKarvonen" />
           <SocialLink name="GitHub" url="https://github.com/the-bearded-nerd" />
+          <SocialLink
+            name="Resume"
+            url="https://krasnogorsk.hh.ru/resume/66a2061bff02fb9cf70039ed1f4754714f6f42"
+          />
         </div>
       </div>
     </div>

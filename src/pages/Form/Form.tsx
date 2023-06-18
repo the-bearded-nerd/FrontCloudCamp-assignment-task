@@ -13,19 +13,15 @@ import {
   ResponseModalContent,
   ResponseModalContentProps,
 } from "../../components/ResponseModalContent/ResponseModalContent";
+import { USER_SEX } from "./types";
 
 import cls from "./Form.module.css";
-
-export enum USER_SEX {
-  man = "man",
-  woman = "woman",
-}
 
 interface Description {
   description: string;
 }
 
-export type Inputs = {
+type Inputs = {
   example: string;
   step1: string;
   step2: string;
@@ -86,23 +82,31 @@ export const Form = () => {
         radio: data.radio ? Number(data.radio) : NaN,
         checkbox: data.checkbox ? data.checkbox.map(Number) : [],
       };
-      const response = await fetch(
-        "https://api.sbercloud.ru/content/v1/bootcamp/fronten",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(dataToSend),
-        }
-      );
-      setModalContent({
-        ok: response.ok,
-        status: response.status,
-        statusText: response.statusText,
-      });
-      console.log(response);
-      openModal();
+      try {
+        const response = await fetch(
+          "https://api.sbercloud.ru/content/v1/bootcamp/frontend",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(dataToSend),
+          }
+        );
+        setModalContent({
+          ok: response.ok,
+          status: response.status,
+          statusText: response.statusText,
+        });
+        openModal();
+      } catch (error) {
+        setModalContent({
+          ok: false,
+          statusText: "запрос не удался",
+        });
+      } finally {
+        openModal();
+      }
     } else next();
   };
 

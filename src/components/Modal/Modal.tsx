@@ -20,13 +20,6 @@ export default function Modal({ isActive, onClose, children }: IModalProps) {
         }}
       >
         {children}
-        <button
-          className={cls["btn-close-modal"]}
-          type="button"
-          onClick={onClose}
-        >
-          X
-        </button>
       </div>
     </div>
   );
