@@ -2,7 +2,7 @@
   max-width: 900px;
   margin: 0 auto;
   padding-top: 25px;
-  padding-bottom: 80px;
+  padding-bottom: 291px;
   background: #ffffff;
   border-radius: 24px;
 }
@@ -30,7 +30,7 @@
 }
 
 .field-tip__hidden {
-  visibility: hidden;
+  display: none;
   height: 16px;
 }
 
