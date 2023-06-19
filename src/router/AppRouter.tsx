@@ -7,7 +7,7 @@ export const AppRouter = () => {
   return (
     <Routes>
       <Route path="/" element={<MainPage />} />
-      <Route path="/form" element={<Form />} />
+      <Route path="/create" element={<Form />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );

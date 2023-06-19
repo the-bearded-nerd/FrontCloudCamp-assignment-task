@@ -26,7 +26,7 @@ export const MainPage = () => {
     reValidateMode: "onChange",
   });
   const onButtonClick = () => {
-    navigate("/form");
+    navigate("/create");
   };
 
   return (
